@@ -1,6 +1,7 @@
 ﻿using System;
 using tabuleiro;
 using jogoDeXadrez;
+using xadrez_console.tabuleiro;
 
 namespace xadrez_console
 {
@@ -9,14 +10,21 @@ namespace xadrez_console
         static void Main(string[] args)
         {
 
-            Tabuleiro tabuleiro = new(8, 8); // Tamanho de um tabuleiro de xadrez
-            tabuleiro.colocarPeca(new Torre(tabuleiro, Cor.Preta), new Posicao(0,0));  //Colocando a peça e em que posição ela está no tabuleiro.
+            try{
+            // Tamanho de um tabuleiro de xadrez
+            Tabuleiro tabuleiro = new(8, 8); 
+
+            //Colocando a peça e em que posição ela está no tabuleiro.
+            tabuleiro.colocarPeca(new Torre(tabuleiro, Cor.Preta), new Posicao(0,0));  
             tabuleiro.colocarPeca(new Torre(tabuleiro, Cor.Preta), new Posicao(1,3));
-            tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.Preta), new Posicao(2,4));
+            tabuleiro.colocarPeca(new Rei(tabuleiro, Cor.Preta), new Posicao(0,2));
 
             Tela.imprimirTabuleiro(tabuleiro);
+            }catch (TabuleiroException e){
 
-            Console.ReadLine();
+                Console.WriteLine(e.Message);
+            }
+
         }
     }
 }

@@ -23,24 +23,34 @@ namespace tabuleiro
         }
 
         // Criando sobrecarga de Peca, onde ao colar uma posição, será o mesmo que int linha, int coluna
-        public Peca peca(Posicao pos){  
-            return pecas[linhas, colunas]; 
+        public Peca peca(Posicao pos)
+        {
+            return pecas[pos.linha, pos.coluna];
         }
-        public void colocarPeca(Peca p, Posicao pos) // Criar função para adicionar peça
-        { 
+
+        // Criar função para adicionar peça e já verificar se existe uma peça nessa posição
+        public void colocarPeca(Peca p, Posicao pos)
+        {
+            if (existePeca(pos))
+            {
+                throw new TabuleiroException("Já existe uma peça nessa posição!");
+            }
             pecas[pos.linha, pos.coluna] = p;  // Colocando a peça p dentro da matriz na posição pos.linha e pos.coluna
             p.posicao = pos; // Definindo que a posição da peça p, vai ser a que eu colocar em pos. Lembrando que a posição tem linha e coluna.
         }
 
+
         //Verificar se existe uma peça nessa posição
-        public bool existePeca(Posicao pos){
+        public bool existePeca(Posicao pos)
+        {
             validarPosicao(pos);
             return peca(pos) != null;
         }
 
         // Verificar se a posição inserida é valida
-        public bool posicaoValida(Posicao pos){
-            if(pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna >= colunas)
+        public bool posicaoValida(Posicao pos)
+        {
+            if (pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna >= colunas)
             {
                 return false;
             }
@@ -48,8 +58,9 @@ namespace tabuleiro
         }
 
         // Se a posição não for válida (FALSE) então lançar uma exceção
-        public void validarPosicao(Posicao pos){
-            if(!posicaoValida(pos))
+        public void validarPosicao(Posicao pos)
+        {
+            if (!posicaoValida(pos))
             {
                 throw new TabuleiroException("Posição inválida");
             }
