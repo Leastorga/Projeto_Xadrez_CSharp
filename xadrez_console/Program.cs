@@ -8,7 +8,10 @@ namespace xadrez_console
         static void Main(string[] args)
         {
 
-            Tabuleiro tabuleiro = new(8, 8);
+            Tabuleiro tabuleiro = new(8, 8); // Tamanho de um tabuleiro de xadrez
+            
+            Tela.imprimirTabuleiro(tabuleiro);
+
             Console.ReadLine();
         }
     }
