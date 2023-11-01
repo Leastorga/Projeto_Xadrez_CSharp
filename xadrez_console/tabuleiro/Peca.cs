@@ -14,7 +14,7 @@ namespace tabuleiro
             this.posicao = null; // Determinamos a função de posição no Tabuleiro, logo ela teria que começar nula.
             this.cor = cor;
             this.qteMovimentos = 0;
+        
         }
     }
 }
-

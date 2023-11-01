@@ -1,5 +1,7 @@
 // Na classe Tabuleiro nos temos linhas e colunas, além de peças. A peça é instânciada, pois uma peça está em uma linha e coluna inicialmente, além de se mover dentro da matriz.
 
+using xadrez_console.tabuleiro;
+
 namespace tabuleiro
 {
     public class Tabuleiro
@@ -20,10 +22,37 @@ namespace tabuleiro
             return pecas[linha, coluna];
         }
 
-        public void colocarPeca(Peca p, Posicao pos)
-        { // Criar função para adicionar peça
+        // Criando sobrecarga de Peca, onde ao colar uma posição, será o mesmo que int linha, int coluna
+        public Peca peca(Posicao pos){  
+            return pecas[linhas, colunas]; 
+        }
+        public void colocarPeca(Peca p, Posicao pos) // Criar função para adicionar peça
+        { 
             pecas[pos.linha, pos.coluna] = p;  // Colocando a peça p dentro da matriz na posição pos.linha e pos.coluna
             p.posicao = pos; // Definindo que a posição da peça p, vai ser a que eu colocar em pos. Lembrando que a posição tem linha e coluna.
+        }
+
+        //Verificar se existe uma peça nessa posição
+        public bool existePeca(Posicao pos){
+            validarPosicao(pos);
+            return peca(pos) != null;
+        }
+
+        // Verificar se a posição inserida é valida
+        public bool posicaoValida(Posicao pos){
+            if(pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna >= colunas)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        // Se a posição não for válida (FALSE) então lançar uma exceção
+        public void validarPosicao(Posicao pos){
+            if(!posicaoValida(pos))
+            {
+                throw new TabuleiroException("Posição inválida");
+            }
         }
     }
 }
