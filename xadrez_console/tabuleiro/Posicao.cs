@@ -1,3 +1,5 @@
+// Na classe posição nós temos a posição que a peça estará, na linha e coluna determinada. 
+
 namespace tabuleiro
 {
     public class Posicao
@@ -7,7 +9,7 @@ namespace tabuleiro
         public Posicao()
         {
         }
-        public Posicao(int linha, int coluna)
+        public Posicao(int linha, int coluna) // Criamos um construtor que diz que a posição recebe (linha, coluna)
         {
             this.linha = linha;
             this.coluna = coluna;
@@ -23,4 +25,3 @@ namespace tabuleiro
     }
 }
 
-// Na classe posição nós temos a posição que a peça estará, na linha e coluna determinada. 
