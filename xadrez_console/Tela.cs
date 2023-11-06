@@ -1,8 +1,9 @@
 using System;
+using System.Runtime.InteropServices.Marshalling;
 using tabuleiro;
 
 // Não está com o tabuleiro pois não é um componente e sim o que tornará os componentes visiveis. 
-// Classe para método de imprimir o tabuleiro
+// Classe para criação o tabuleiro visivelmente, utilizando uma função de imprimir o tabuleiro para mostra-lo assim que todas as peças forem colocadas.
 namespace xadrez_console
 {
     public class Tela
@@ -12,6 +13,7 @@ namespace xadrez_console
 
             for (int i = 0; i < tabuleiro.linhas; i++)
             {
+                Console.Write(8 - i + " ");
                 for (int j = 0; j < tabuleiro.colunas; j++)
                 {
                     if (tabuleiro.peca(i, j) == null) // se não houver peça no tabuleiro imprimeiro "-"
@@ -20,10 +22,27 @@ namespace xadrez_console
                     }
                     else
                     {
-                        Console.Write(tabuleiro.peca(i, j) + " "); // Se houver imprimir a peça
+                        Tela.imprimeirPeca(tabuleiro.peca(i, j));
+                        Console.Write(" "); // Se houver imprimir a peça
                     }
                 }
                 Console.WriteLine(); // Quando acabar as colunas pula de linha
+            }
+            Console.Write("  a b c d e f g h");
+        }
+
+        public static void imprimeirPeca(Peca peca)
+        {
+            if (peca.cor == Cor.Branca)
+            {
+                Console.Write(peca);
+            }
+            else
+            {
+                ConsoleColor aux = Console.ForegroundColor;
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                Console.Write(peca);
+                Console.ForegroundColor = aux;
             }
         }
     }
