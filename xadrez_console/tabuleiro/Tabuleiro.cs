@@ -38,7 +38,19 @@ namespace tabuleiro
             pecas[pos.linha, pos.coluna] = p;  // Colocando a peça p dentro da matriz na posição pos.linha e pos.coluna
             p.posicao = pos; // Definindo que a posição da peça p, vai ser a que eu colocar em pos. Lembrando que a posição tem linha e coluna.
         }
-
+        
+        // Função para retirar peças, se a posição for nula retorna nula, se não a variável auxiliar vai armazenar a posição da peça e depois fazer a posição ser nula, além disso a linha e coluna onde ela estava irá valer nulo e depois retornar, o que no caso retornaria " - " no tabuleiro.
+        public Peca tirarPeca(Posicao pos)
+        {
+            if (peca(pos) == null)
+            {
+                return null;
+            }
+            Peca aux = peca(pos);
+            aux.posicao = null;
+            pecas[pos.linha, pos.coluna] = null;
+            return aux;
+        }
 
         //Verificar se existe uma peça nessa posição
         public bool existePeca(Posicao pos)
@@ -65,6 +77,6 @@ namespace tabuleiro
                 throw new TabuleiroException("Posição inválida");
             }
         }
-        
+
     }
 }

@@ -22,7 +22,7 @@ namespace xadrez_console
                     }
                     else
                     {
-                        Tela.imprimeirPeca(tabuleiro.peca(i, j));
+                        Tela.imprimirPeca(tabuleiro.peca(i, j));
                         Console.Write(" "); // Se houver imprimir a peça
                     }
                 }
@@ -31,7 +31,9 @@ namespace xadrez_console
             Console.Write("  a b c d e f g h");
         }
 
-        public static void imprimeirPeca(Peca peca)
+
+        // Método de imprimir Peça, diferenciando as cores das peças. 
+        public static void imprimirPeca(Peca peca)
         {
             if (peca.cor == Cor.Branca)
             {

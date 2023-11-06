@@ -2,7 +2,6 @@
 using tabuleiro;
 using jogoDeXadrez;
 using xadrez_console.tabuleiro;
-using xadrez;
 
 namespace xadrez_console
 {
