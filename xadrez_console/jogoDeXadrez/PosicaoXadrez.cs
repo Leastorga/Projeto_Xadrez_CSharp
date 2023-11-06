@@ -16,7 +16,7 @@ namespace xadrez
         // Matriz está invertida logo os número são as linhas e as colunas são as strings 
         // Importante lembrar que o a string está sendo subtraida através da sua representação númerica vista na tabela de unicode.
         public Posicao ToPosicao() {
-            return new Posicao(coluna - 'a', 8 - linha);
+            return new Posicao(8 - linha, coluna - 'a');
         }
         public override string ToString()
         {

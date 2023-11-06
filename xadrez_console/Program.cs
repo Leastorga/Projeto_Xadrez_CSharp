@@ -11,7 +11,8 @@ namespace xadrez_console
         static void Main(string[] args)
         {
 
-            PosicaoXadrez pos = new PosicaoXadrez('a', 1);
+            PosicaoXadrez pos = new PosicaoXadrez('c', 7);
+            Console.WriteLine(pos);
             Console.WriteLine(pos.ToPosicao());
             
         }
