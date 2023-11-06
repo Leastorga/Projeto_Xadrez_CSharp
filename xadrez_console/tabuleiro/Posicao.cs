@@ -9,7 +9,9 @@ namespace tabuleiro
         public Posicao()
         {
         }
-        public Posicao(int linha, int coluna) // Criamos um construtor que diz que a posição recebe (linha, coluna)
+
+        // Criamos um construtor que diz que a posição recebe (linha, coluna)
+        public Posicao(int linha, int coluna) 
         {
             this.linha = linha;
             this.coluna = coluna;
