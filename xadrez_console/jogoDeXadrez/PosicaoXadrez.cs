@@ -12,7 +12,7 @@ namespace xadrez
             this.linha = linha;
         }
 
-        // Função para colocar dentro do tabuleiro a peça na posição correta, já que o tabuleiro possui letras e números. 
+        // Convertemos o método ToPosicao para uma posição comum da matriz tabuleiro
         // Matriz está invertida logo os número são as linhas e as colunas são as strings 
         // Importante lembrar que o a string está sendo subtraida através da sua representação númerica vista na tabela de unicode.
         public Posicao ToPosicao() {
