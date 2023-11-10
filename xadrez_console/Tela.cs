@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices.Marshalling;
+using jogoDeXadrez;
 using tabuleiro;
 
 // Não está com o tabuleiro pois não é um componente e sim o que tornará os componentes visiveis. 
@@ -29,6 +30,8 @@ namespace xadrez_console
                 Console.WriteLine(); // Quando acabar as colunas pula de linha
             }
             Console.Write("  a b c d e f g h");
+            Console.WriteLine();
+            
         }
 
 
@@ -46,6 +49,14 @@ namespace xadrez_console
                 Console.Write(peca);
                 Console.ForegroundColor = aux;
             }
+        }
+
+// Método que le a posição escrita pelo o usuário, primeiro uma string que receberá a posição, onde primeiro será o char coluna e o int linha que está sendo convertido em uma string.
+        public static PosicaoXadrez lerPosicaoXadrez(){
+            string s = Console.ReadLine();
+            char coluna = s[0];
+            int linha = int.Parse(s[1] + " ");
+            return new PosicaoXadrez(coluna, linha);
         }
     }
 }
