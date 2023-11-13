@@ -2,7 +2,7 @@ using tabuleiro;
 // Aqui na classe Peca temos que uma peça tem uma posição, uma cor, a quantidade de movimentos que pode ter e ela está em um tabuleiro.
 namespace tabuleiro
 {
-    public class Peca
+    abstract class Peca
     {
         public Posicao posicao { get; set; }
         public Cor cor { get; protected set; }
@@ -20,5 +20,7 @@ namespace tabuleiro
         public void incrementarQteMovimentos(){
             qteMovimentos++;
         }
+
+        public abstract bool [,] movimentosPosiveis();
     }
 }

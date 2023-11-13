@@ -27,6 +27,7 @@ namespace jogoDeXadrez
             tab.colocarPeca(p, destino);
         }
 
+        // Metódo para colocar as peças no tabuleiro
         private void colocarPecas(){
             tab.colocarPeca(new Torre(tab, Cor.Branca), new PosicaoXadrez('c', 1).ToPosicao());
             tab.colocarPeca(new Torre(tab, Cor.Branca), new PosicaoXadrez('c', 2).ToPosicao());
