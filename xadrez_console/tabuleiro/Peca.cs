@@ -21,6 +21,7 @@ namespace tabuleiro
             qteMovimentos++;
         }
 
-        public abstract bool [,] movimentosPosiveis();
+        //Criamos a função abstract porque servirá de modelo para as classes especifícas das peças. 
+        public abstract bool [,] movimentosPossiveis();
     }
 }

@@ -1,10 +1,10 @@
 // Na classe Tabuleiro nos temos linhas e colunas, além de peças. A peça é instânciada, pois uma peça está em uma linha e coluna inicialmente, além de se mover dentro da matriz.
 
-using xadrez_console.tabuleiro;
+using tabuleiro;
 
 namespace tabuleiro
 {
-    public class Tabuleiro
+    class Tabuleiro
     {
         public int linhas { get; set; }
         public int colunas { get; set; }

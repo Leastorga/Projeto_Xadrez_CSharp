@@ -7,7 +7,7 @@ using tabuleiro;
 // Classe para criação o tabuleiro visivelmente, utilizando uma função de imprimir o tabuleiro para mostra-lo assim que todas as peças forem colocadas.
 namespace xadrez_console
 {
-    public class Tela
+    class Tela
     {
         public static void imprimirTabuleiro(Tabuleiro tabuleiro)
         {
