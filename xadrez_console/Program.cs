@@ -44,12 +44,14 @@ namespace xadrez_console
                     catch (TabuleiroException e)
                     {
                         Console.WriteLine($"{e.Message}");
-                        Console.WriteLine("Para retornar a jogada aperte enter: ");
+                        Console.Write("Para retornar a jogada aperte enter: ");
                         Console.ReadLine();
 
                     }
                 }
-            } catch(TabuleiroException e){
+            }
+            catch (TabuleiroException e)
+            {
                 Console.Write($"{e.Message}");
             }
         }

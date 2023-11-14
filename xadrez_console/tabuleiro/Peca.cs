@@ -36,6 +36,10 @@ namespace tabuleiro
             return false;
         }
 
+        //Método para validar se a peça pode mudar para o lugar que for digitado
+        public bool podeMoverPara(Posicao pos){
+            return movimentosPossiveis()[pos.linha, pos.coluna];
+        }
         //Criamos a função abstract porque servirá de modelo para as classes especifícas das peças. 
         public abstract bool [,] movimentosPossiveis();
     }

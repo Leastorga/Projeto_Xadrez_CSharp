@@ -50,6 +50,10 @@ namespace jogoDeXadrez
             }
         }
 
+        // public void validarPosicaoDestino(Posicao origem, Posicao destino){
+        //     if(tab.peca(origem).podeMoverPara(destino))
+        // }
+
         // Método para alterar a cor da peça do tabuleiro
         private void mudaJogador()
         {
