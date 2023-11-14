@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using tabuleiro;
 
 // Essa classe foi criada com o intuito de realizar a partida de xadrez
@@ -6,8 +7,8 @@ namespace jogoDeXadrez
     class PartidaDeXadrez
     {
         public Tabuleiro tab { get; private set; }
-        private int turno;
-        private Cor jogadorAtual;
+        public int turno {get; private set;}
+        public Cor jogadorAtual { get; private set; }
         public bool terminada { get; private set; }
 
         // Aqui determinamos uma início da partida, qual o turno e quem irá começar.
@@ -27,6 +28,25 @@ namespace jogoDeXadrez
             p.incrementarQteMovimentos();
             Peca pecaCapturada = tab.tirarPeca(destino);
             tab.colocarPeca(p, destino);
+        }
+
+        public void realizaJogada(Posicao origem, Posicao destino)
+        {
+            executaMovimento(origem, destino);
+            turno++;
+            mudaJogador();
+        }
+
+        private void mudaJogador()
+        {
+            if (jogadorAtual == Cor.Branca)
+            {
+                jogadorAtual = Cor.Preta;
+            }
+            else
+            {
+                jogadorAtual = Cor.Branca;
+            }
         }
 
         // Metódo para colocar as peças no tabuleiro
