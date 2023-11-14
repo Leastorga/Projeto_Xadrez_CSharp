@@ -18,7 +18,7 @@ namespace jogoDeXadrez
         private bool podeMover(Posicao pos)
         {
             Peca p = tabuleiro.peca(pos); // P é igual a peça no tabuleiro em uma posição
-            return p != null || p.cor != cor; // retorne p se não for nula ou se houver uma peça adversária
+            return p == null || p.cor != cor; // retorne p se não for nula ou se houver uma peça adversária
         }
 
         public override bool[,] movimentosPossiveis()
@@ -36,7 +36,7 @@ namespace jogoDeXadrez
                 {
                     break;
                 }
-                pos.linha = -1;
+                pos.linha--;
             }
 
 
@@ -49,7 +49,7 @@ namespace jogoDeXadrez
                 {
                     break;
                 }
-                pos.linha = +1;
+                pos.linha++;
             }
 
 
@@ -62,7 +62,7 @@ namespace jogoDeXadrez
                 {
                     break;
                 }
-                pos.coluna = +1;
+                pos.coluna++;
             }
 
             // Para esquerda
@@ -74,7 +74,7 @@ namespace jogoDeXadrez
                 {
                     break;
                 }
-                pos.coluna = -1;
+                pos.coluna--;
             }
             return matriz;
         }
