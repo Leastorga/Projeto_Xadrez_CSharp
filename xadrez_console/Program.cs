@@ -14,36 +14,44 @@ namespace xadrez_console
             {
                 PartidaDeXadrez partida = new PartidaDeXadrez();
 
+
+
                 while (!partida.terminada)
                 {
-                    Console.Clear();
-                    Tela.imprimirTabuleiro(partida.tab);
-                    Console.WriteLine();
-                    Console.WriteLine($"Turno: {partida.turno} ");
-                    Console.WriteLine($"Aguardando jogada: {partida.jogadorAtual}");
-                    
-                    
+                    try
+                    {
+                        Console.Clear();
+                        Tela.imprimirTabuleiro(partida.tab);
+                        Console.WriteLine();
+                        Console.WriteLine($"Turno: {partida.turno} ");
+                        Console.WriteLine($"Aguardando jogada: {partida.jogadorAtual}");
 
-                    Console.WriteLine();
-                    Console.Write("Origem: ");
-                    Posicao origem = Tela.lerPosicaoXadrez().ToPosicao();
 
-                    bool [,] posicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
-                    Console.Clear();
-                    Tela.imprimirTabuleiro(partida.tab, posicoesPossiveis);
+                        Console.WriteLine();
+                        Console.Write("Origem: ");
+                        Posicao origem = Tela.lerPosicaoXadrez().ToPosicao();
+                        partida.validarPosicaoOrigem(origem);
 
-                    Console.Write("Destino: ");
-                    Posicao destino = Tela.lerPosicaoXadrez().ToPosicao();
+                        bool[,] posicoesPossiveis = partida.tab.peca(origem).movimentosPossiveis();
+                        Console.Clear();
+                        Tela.imprimirTabuleiro(partida.tab, posicoesPossiveis);
 
-                    partida.realizaJogada(origem, destino);
+                        Console.Write("Destino: ");
+                        Posicao destino = Tela.lerPosicaoXadrez().ToPosicao();
+
+                        partida.realizaJogada(origem, destino);
+                    }
+                    catch (TabuleiroException e)
+                    {
+                        Console.WriteLine($"{e.Message}");
+                        Console.WriteLine("Para retornar a jogada aperte enter: ");
+                        Console.ReadLine();
+
+                    }
                 }
+            } catch(TabuleiroException e){
+                Console.Write($"{e.Message}");
             }
-            catch (TabuleiroException e)
-            {
-                Console.WriteLine($"{e.Message}");
-
-            }
-
         }
     }
 }

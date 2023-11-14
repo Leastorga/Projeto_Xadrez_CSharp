@@ -30,6 +30,7 @@ namespace jogoDeXadrez
             tab.colocarPeca(p, destino);
         }
 
+        // Método para realizar a jogada e depois alterar o turno e jogador. 
         public void realizaJogada(Posicao origem, Posicao destino)
         {
             executaMovimento(origem, destino);
@@ -37,6 +38,19 @@ namespace jogoDeXadrez
             mudaJogador();
         }
 
+        public void validarPosicaoOrigem(Posicao pos){
+            if(tab.peca(pos) == null){
+                throw new TabuleiroException("Não existe peça na posição de origem escolhida!");
+            }
+            if(jogadorAtual != tab.peca(pos).cor){
+                throw new TabuleiroException("A peça de origem escolhida não é sua!");
+            }
+            if(!tab.peca(pos).existeMovimentosPossiveis()){
+                throw new TabuleiroException("Não há movimentos possíveis para a peça de origem escolhida!");
+            }
+        }
+
+        // Método para alterar a cor da peça do tabuleiro
         private void mudaJogador()
         {
             if (jogadorAtual == Cor.Branca)

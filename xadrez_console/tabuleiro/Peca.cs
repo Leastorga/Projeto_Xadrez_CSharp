@@ -21,6 +21,21 @@ namespace tabuleiro
             qteMovimentos++;
         }
 
+        // Verificar se existe como a peça de mover, ou seja, se ela consegue realizar movimentos. 
+        public bool existeMovimentosPossiveis(){
+            bool[,] matriz = movimentosPossiveis();
+            for(int i = 0; i < tabuleiro.linhas; i++)
+            {
+                for(int j = 0; j < tabuleiro.colunas; j++)
+                {
+                    if(matriz[i,j]){
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         //Criamos a função abstract porque servirá de modelo para as classes especifícas das peças. 
         public abstract bool [,] movimentosPossiveis();
     }
