@@ -19,7 +19,7 @@ namespace jogoDeXadrez
         private bool podeMover(Posicao pos)
         {
             Peca p = tabuleiro.peca(pos); // P é igual a peça no tabuleiro em uma posição
-            return p != null || p.cor != cor; // retorne p se não for nula ou se houver uma peça adversária
+            return p == null || p.cor != cor; // retorne p se não for nula ou se houver uma peça adversária
         }
 
 
@@ -37,7 +37,7 @@ namespace jogoDeXadrez
             }
 
             // Mover nordeste
-            pos.definirValores(posicao.linha, posicao.coluna + 1);
+            pos.definirValores(posicao.linha - 1, posicao.coluna + 1);
             if (tabuleiro.posicaoValida(pos) && podeMover(pos))
             {
                 matriz[pos.linha, pos.coluna] = true;
@@ -51,7 +51,7 @@ namespace jogoDeXadrez
             }
 
             // Mover sudeste
-            pos.definirValores(posicao.linha, posicao.coluna + 1);
+            pos.definirValores(posicao.linha + 1, posicao.coluna + 1);
             if (tabuleiro.posicaoValida(pos) && podeMover(pos))
             {
                 matriz[pos.linha, pos.coluna] = true;
