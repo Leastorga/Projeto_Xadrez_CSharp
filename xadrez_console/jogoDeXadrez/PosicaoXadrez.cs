@@ -15,7 +15,7 @@ namespace jogoDeXadrez
         // Convertemos o método ToPosicao para uma posição comum da matriz tabuleiro
         // Matriz está invertida logo os número são as linhas e as colunas são as strings 
         // Importante lembrar que o a string está sendo subtraida através da sua representação númerica vista na tabela de unicode.
-        public Posicao ToPosicao() {
+        public Posicao toPosicao() {
             return new Posicao(8 - linha, coluna - 'a');
         }
         public override string ToString()
