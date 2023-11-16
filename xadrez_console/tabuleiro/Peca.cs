@@ -21,6 +21,10 @@ namespace tabuleiro
             QteMovimentos++;
         }
 
+        public void DecrementarQteMovimentos(){
+            QteMovimentos--;
+        }
+
         // Verificar se existe como a peça de mover, ou seja, se ela consegue realizar movimentos. 
         public bool ExisteMovimentosPossiveis(){
             bool[,] matriz = MovimentosPossiveis();

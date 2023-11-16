@@ -12,6 +12,7 @@ namespace jogoDeXadrez
         public bool Terminada { get; private set; }
         private HashSet<Peca> Pecas;  //  HashSet: Conjunto que armazena elementos únicos sem duplicatas
         private HashSet<Peca> Capturadas;
+        public bool Xaque { get; private set; }
 
         // Aqui determinamos uma início da partida, qual o turno e quem irá começar.
         public PartidaDeXadrez()
@@ -20,13 +21,14 @@ namespace jogoDeXadrez
             Turno = 1;
             JogadorAtual = Cor.Branca;
             Terminada = false;
+            Xaque = false;
             Pecas = new HashSet<Peca>();
             Capturadas = new HashSet<Peca>();
             ColocarPecas();
         }
 
         // Também criamos uma função para exercutar um movimento e caso haja uma peça lá, tirar ela de dentro do tabuleiro e ir até o seu destino selecionado.
-        public void ExecutaMovimento(Posicao origem, Posicao destino)
+        public Peca ExecutaMovimento(Posicao origem, Posicao destino)
         {
             Peca p = Tab.TirarPeca(origem);
             p.IncrementarQteMovimentos();
@@ -36,12 +38,38 @@ namespace jogoDeXadrez
             {
                 Capturadas.Add(pecaCapturada);
             }
+            return pecaCapturada;
+        }
+
+        public void DesfazMovimento(Posicao origem, Posicao destino, Peca pecaCapturada)
+        {
+            Peca p = Tab.TirarPeca(destino);
+            p.DecrementarQteMovimentos();
+            if (pecaCapturada != null)
+            {
+                Tab.ColocarPeca(pecaCapturada, destino);
+                Capturadas.Remove(pecaCapturada);
+            }
+            Tab.ColocarPeca(p, origem);
         }
 
         // Método para realizar a jogada e depois alterar o turno e jogador. 
         public void RealizaJogada(Posicao origem, Posicao destino)
         {
-            ExecutaMovimento(origem, destino);
+            Peca pecaCapturada = ExecutaMovimento(origem, destino);
+            if (EstaEmCheque(JogadorAtual))
+            {
+                DesfazMovimento(origem, destino, pecaCapturada);
+                throw new TabuleiroException("Você não pode se colocar em xaque!");
+            }
+            if (EstaEmCheque(Adversaria(JogadorAtual)))
+            {
+                Xaque = true;
+            }
+            else
+            {
+                Xaque = false;
+            }
             Turno++;
             MudaJogador();
         }
@@ -113,6 +141,47 @@ namespace jogoDeXadrez
             return aux;
         }
 
+        private Cor Adversaria(Cor cor)
+        {
+            if (cor == Cor.Branca)
+            {
+                return Cor.Preta;
+            }
+            else
+            {
+                return Cor.Branca;
+            }
+        }
+
+        private Peca Rei(Cor cor)
+        {
+            foreach (Peca x in PecasEmJogo(cor))
+            {
+                if (x is Rei)
+                {
+                    return x;
+                }
+            }
+            return null;
+        }
+
+        public bool EstaEmCheque(Cor cor)
+        {
+            Peca rei = Rei(cor);
+            if (rei == null)
+            {
+                throw new TabuleiroException("Não tem rei da cor " + cor + " no tabuleiro!");
+            }
+            foreach (Peca X in PecasEmJogo(Adversaria(cor)))
+            {
+                bool[,] matriz = X.MovimentosPossiveis();
+                if (matriz[rei.Posicao.Linha, rei.Posicao.Coluna])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         public void ColocarNovaPeca(char coluna, int linha, Peca peca)
         {
             Tab.ColocarPeca(peca, new PosicaoXadrez(coluna, linha).ToPosicao());
