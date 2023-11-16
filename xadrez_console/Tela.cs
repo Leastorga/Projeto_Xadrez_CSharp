@@ -1,5 +1,4 @@
-using System;
-using System.Runtime.InteropServices.Marshalling;
+using System.Collections.Generic;
 using jogoDeXadrez;
 using tabuleiro;
 
@@ -9,48 +8,89 @@ namespace xadrez_console
 {
     class Tela
     {
-        public static void imprimirTabuleiro(Tabuleiro tabuleiro)
+    
+        // Método para imprimir o inicio da partida e os seguintes turnos
+        public static void ImprimirPartida(PartidaDeXadrez partida)
+        {
+            ImprimirTabuleiro(partida.Tab);
+            Console.WriteLine();
+            ImprimirPecasCapturadas(partida);
+            Console.WriteLine();
+            Console.WriteLine($"Turno: {partida.Turno} ");
+            Console.WriteLine($"Aguardando jogada: {partida.JogadorAtual}");
+        }
+
+        // Método para imprimir as peças capturadas
+        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida){
+            Console.WriteLine("Peças capturadas: ");
+            Console.Write("Brancas: ");
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
+            Console.WriteLine();
+            Console.Write("Pretas: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
+            
+        }
+        
+        // Método para imprimir os conjuntos das peças capturadas
+        public static void ImprimirConjunto(HashSet<Peca> conjunto){
+            Console.Write("[");
+            foreach (Peca x in conjunto)
+            {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+        }
+
+        // Método para imprimir o tabuleiro
+        public static void ImprimirTabuleiro(Tabuleiro tabuleiro)
         {
 
-            for (int i = 0; i < tabuleiro.linhas; i++)
+            for (int i = 0; i < tabuleiro.Linhas; i++)
             {
                 Console.Write(8 - i + " ");
-                for (int j = 0; j < tabuleiro.colunas; j++)
+                for (int j = 0; j < tabuleiro.Colunas; j++)
                 {
-                    imprimirPeca(tabuleiro.peca(i, j));
+                    ImprimirPeca(tabuleiro.Peca(i, j));
                 }
                 Console.WriteLine(); // Quando acabar as colunas pula de linha
             }
             Console.WriteLine("  a b c d e f g h");
         }
-        public static void imprimirTabuleiro(Tabuleiro tabuleiro, bool[,] posicoesPossiveis)
+        public static void ImprimirTabuleiro(Tabuleiro tabuleiro, bool[,] posicoesPossiveis)
         {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
             ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
 
-            for (int i = 0; i < tabuleiro.linhas; i++)
+            for (int i = 0; i < tabuleiro.Linhas; i++)
             {
                 Console.Write(8 - i + " ");
-                for (int j = 0; j < tabuleiro.colunas; j++)
+                for (int j = 0; j < tabuleiro.Colunas; j++)
                 {
-                    if(posicoesPossiveis[i,j]){
+                    if (posicoesPossiveis[i, j])
+                    {
                         Console.BackgroundColor = fundoAlterado;
-                    }else{
+                    }
+                    else
+                    {
                         Console.BackgroundColor = fundoOriginal;
                     }
-                    imprimirPeca(tabuleiro.peca(i, j));
+                    ImprimirPeca(tabuleiro.Peca(i, j));
                     Console.BackgroundColor = fundoOriginal;
                 }
                 Console.WriteLine(); // Quando acabar as colunas pula de linha
             }
             Console.WriteLine("  a b c d e f g h");
             Console.BackgroundColor = fundoOriginal;
-            
+
         }
 
 
         // Método de imprimir Peça, diferenciando as cores das peças. 
-        public static void imprimirPeca(Peca peca)
+        public static void ImprimirPeca(Peca peca)
         {
             if (peca == null)
             {
@@ -58,7 +98,7 @@ namespace xadrez_console
             }
             else
             {
-                if (peca.cor == Cor.Branca)
+                if (peca.Cor == Cor.Branca)
                 {
                     Console.Write(peca);
                 }
@@ -74,12 +114,13 @@ namespace xadrez_console
         }
 
         // Método que le a posição escrita pelo o usuário, primeiro uma string que receberá a posição, onde primeiro será o char coluna e o int linha que está sendo convertido em uma string.
-        public static PosicaoXadrez lerPosicaoXadrez()
+        public static PosicaoXadrez LerPosicaoXadrez()
         {
             string s = Console.ReadLine();
             char coluna = s[0];
             int linha = int.Parse(s[1] + " ");
             return new PosicaoXadrez(coluna, linha);
         }
+
     }
 }

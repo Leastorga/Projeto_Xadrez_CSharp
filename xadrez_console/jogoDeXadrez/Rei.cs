@@ -16,73 +16,73 @@ namespace jogoDeXadrez
         }
 
         // Método privado que possibilita a verificação de o rei pode ou não se mover. 
-        private bool podeMover(Posicao pos)
+        private bool PodeMover(Posicao pos)
         {
-            Peca p = tabuleiro.peca(pos); // P é igual a peça no tabuleiro em uma posição
-            return p == null || p.cor != cor; // retorne p se não for nula ou se houver uma peça adversária
+            Peca p = Tabuleiro.Peca(pos); // P é igual a peça no tabuleiro em uma posição
+            return p == null || p.Cor != Cor; // retorne p se não for nula ou se houver uma peça adversária
         }
 
 
-        public override bool[,] movimentosPossiveis()
+        public override bool[,] MovimentosPossiveis()
         {
-            bool[,] matriz = new bool[tabuleiro.linhas, tabuleiro.colunas];
+            bool[,] matriz = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
 
             Posicao pos = new Posicao(0, 0);
 
             // Verificar a posição em cima da peça
-            pos.definirValores(posicao.linha - 1, posicao.coluna);
-            if (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
+                matriz[pos.Linha, pos.Coluna] = true;
             }
 
             // Mover nordeste
-            pos.definirValores(posicao.linha - 1, posicao.coluna + 1);
-            if (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
+                matriz[pos.Linha, pos.Coluna] = true;
             }
 
             // Mover direita
-            pos.definirValores(posicao.linha, posicao.coluna + 1);
-            if (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
+                matriz[pos.Linha, pos.Coluna] = true;
             }
 
             // Mover sudeste
-            pos.definirValores(posicao.linha + 1, posicao.coluna + 1);
-            if (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
+                matriz[pos.Linha, pos.Coluna] = true;
             }
 
             // Mover para baixo
-            pos.definirValores(posicao.linha + 1, posicao.coluna);
-            if (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
+                matriz[pos.Linha, pos.Coluna] = true;
             }
 
             // Mover sudoeste
-            pos.definirValores(posicao.linha + 1, posicao.coluna - 1);
-            if (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
+                matriz[pos.Linha, pos.Coluna] = true;
             }
 
             // Mover esquerda
-            pos.definirValores(posicao.linha, posicao.coluna - 1);
-            if (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
+                matriz[pos.Linha, pos.Coluna] = true;
             }
 
             // Mover noroeste
-            pos.definirValores(posicao.linha - 1, posicao.coluna - 1);
-            if (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
+            if (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
+                matriz[pos.Linha, pos.Coluna] = true;
             }
 
             return matriz;

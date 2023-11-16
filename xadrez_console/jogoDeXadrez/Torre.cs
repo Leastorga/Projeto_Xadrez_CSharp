@@ -15,66 +15,66 @@ namespace jogoDeXadrez
         }
 
         // Método privado que possibilita a verificação de o rei pode ou não se mover. 
-        private bool podeMover(Posicao pos)
+        private bool PodeMover(Posicao pos)
         {
-            Peca p = tabuleiro.peca(pos); // P é igual a peça no tabuleiro em uma posição
-            return p == null || p.cor != cor; // retorne p se não for nula ou se houver uma peça adversária
+            Peca p = Tabuleiro.Peca(pos); // P é igual a peça no tabuleiro em uma posição
+            return p == null || p.Cor != Cor; // retorne p se não for nula ou se houver uma peça adversária
         }
 
-        public override bool[,] movimentosPossiveis()
+        public override bool[,] MovimentosPossiveis()
         {
-            bool[,] matriz = new bool[tabuleiro.linhas, tabuleiro.colunas];
+            bool[,] matriz = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
 
             Posicao pos = new Posicao(0, 0);
 
             // Mover para cima
-            pos.definirValores(posicao.linha - 1, posicao.coluna);
-            while (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
-                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != cor)
+                matriz[pos.Linha, pos.Coluna] = true;
+                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
-                pos.linha--;
+                pos.Linha--;
             }
 
 
             // Mover para baixo
-            pos.definirValores(posicao.linha + 1, posicao.coluna);
-            while (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
-                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != cor)
+                matriz[pos.Linha, pos.Coluna] = true;
+                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
-                pos.linha++;
+                pos.Linha++;
             }
 
 
             // Para direita
-            pos.definirValores(posicao.linha, posicao.coluna + 1);
-            while (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
-                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != cor)
+                matriz[pos.Linha, pos.Coluna] = true;
+                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
-                pos.coluna++;
+                pos.Coluna++;
             }
 
             // Para esquerda
-            pos.definirValores(posicao.linha, posicao.coluna - 1);
-            while (tabuleiro.posicaoValida(pos) && podeMover(pos))
+            pos.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
+            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
             {
-                matriz[pos.linha, pos.coluna] = true;
-                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != cor)
+                matriz[pos.Linha, pos.Coluna] = true;
+                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
-                pos.coluna--;
+                pos.Coluna--;
             }
             return matriz;
         }
