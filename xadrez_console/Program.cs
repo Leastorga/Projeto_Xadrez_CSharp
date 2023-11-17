@@ -2,7 +2,6 @@
 using tabuleiro;
 using jogoDeXadrez;
 
-
 namespace xadrez_console
 {
     class Program
@@ -13,8 +12,6 @@ namespace xadrez_console
             try
             {
                 PartidaDeXadrez partida = new PartidaDeXadrez();
-
-
 
                 while (!partida.Terminada)
                 {
@@ -32,7 +29,7 @@ namespace xadrez_console
 
                         Console.Clear();
                         Tela.ImprimirTabuleiro(partida.Tab, posicoesPossiveis);
-                        
+
                         Console.WriteLine();
                         Console.Write("Destino: ");
                         Posicao destino = Tela.LerPosicaoXadrez().ToPosicao();
@@ -48,11 +45,14 @@ namespace xadrez_console
 
                     }
                 }
+                Console.Clear();
+                Tela.ImprimirPartida(partida);
             }
             catch (TabuleiroException e)
             {
                 Console.Write($"{e.Message}");
             }
+            Console.ReadLine();
         }
     }
 }

@@ -6,9 +6,6 @@ namespace tabuleiro
     {
         public int Linha { get; set; }
         public int Coluna { get; set; }
-        public Posicao()
-        {
-        }
 
         // Criamos um construtor que diz que a posição recebe (linha, coluna)
         public Posicao(int linha, int coluna) 

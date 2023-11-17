@@ -5,7 +5,7 @@ namespace jogoDeXadrez
 {
     class Torre : Peca
     {
-        public Torre(Tabuleiro tabuleiro, Cor cor) : base(tabuleiro, cor)
+        public Torre(Tabuleiro tab, Cor cor) : base(tab, cor)
         {
         }
 
@@ -17,22 +17,22 @@ namespace jogoDeXadrez
         // Método privado que possibilita a verificação de o rei pode ou não se mover. 
         private bool PodeMover(Posicao pos)
         {
-            Peca p = Tabuleiro.Peca(pos); // P é igual a peça no tabuleiro em uma posição
+            Peca p = Tab.Peca(pos); // P é igual a peça no tabuleiro em uma posição
             return p == null || p.Cor != Cor; // retorne p se não for nula ou se houver uma peça adversária
         }
 
         public override bool[,] MovimentosPossiveis()
         {
-            bool[,] matriz = new bool[Tabuleiro.Linhas, Tabuleiro.Colunas];
+            bool[,] matriz = new bool[Tab.Linhas, Tab.Colunas];
 
             Posicao pos = new Posicao(0, 0);
 
             // Mover para cima
             pos.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
-            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            while (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
-                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
+                if (Tab.Peca(pos) != null && Tab.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
@@ -42,10 +42,10 @@ namespace jogoDeXadrez
 
             // Mover para baixo
             pos.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
-            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            while (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
-                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
+                if (Tab.Peca(pos) != null && Tab.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
@@ -55,10 +55,10 @@ namespace jogoDeXadrez
 
             // Para direita
             pos.DefinirValores(Posicao.Linha, Posicao.Coluna + 1);
-            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            while (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
-                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
+                if (Tab.Peca(pos) != null && Tab.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
@@ -67,10 +67,10 @@ namespace jogoDeXadrez
 
             // Para esquerda
             pos.DefinirValores(Posicao.Linha, Posicao.Coluna - 1);
-            while (Tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            while (Tab.PosicaoValida(pos) && PodeMover(pos))
             {
                 matriz[pos.Linha, pos.Coluna] = true;
-                if (Tabuleiro.Peca(pos) != null && Tabuleiro.Peca(pos).Cor != Cor)
+                if (Tab.Peca(pos) != null && Tab.Peca(pos).Cor != Cor)
                 {
                     break;
                 }
@@ -78,8 +78,5 @@ namespace jogoDeXadrez
             }
             return matriz;
         }
-
-
-
     }
 }

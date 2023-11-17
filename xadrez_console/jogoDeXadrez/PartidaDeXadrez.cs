@@ -12,7 +12,7 @@ namespace jogoDeXadrez
         public bool Terminada { get; private set; }
         private HashSet<Peca> Pecas;  //  HashSet: Conjunto que armazena elementos únicos sem duplicatas
         private HashSet<Peca> Capturadas;
-        public bool Xaque { get; private set; }
+        public bool Xeque { get; private set; }
 
         // Aqui determinamos uma início da partida, qual o turno e quem irá começar.
         public PartidaDeXadrez()
@@ -21,7 +21,7 @@ namespace jogoDeXadrez
             Turno = 1;
             JogadorAtual = Cor.Branca;
             Terminada = false;
-            Xaque = false;
+            Xeque = false;
             Pecas = new HashSet<Peca>();
             Capturadas = new HashSet<Peca>();
             ColocarPecas();
@@ -57,6 +57,7 @@ namespace jogoDeXadrez
         public void RealizaJogada(Posicao origem, Posicao destino)
         {
             Peca pecaCapturada = ExecutaMovimento(origem, destino);
+
             if (EstaEmCheque(JogadorAtual))
             {
                 DesfazMovimento(origem, destino, pecaCapturada);
@@ -64,11 +65,11 @@ namespace jogoDeXadrez
             }
             if (EstaEmCheque(Adversaria(JogadorAtual)))
             {
-                Xaque = true;
+                Xeque = true;
             }
             else
             {
-                Xaque = false;
+                Xeque = false;
             }
             Turno++;
             MudaJogador();
@@ -92,7 +93,7 @@ namespace jogoDeXadrez
 
         public void ValidarPosicaoDestino(Posicao origem, Posicao destino)
         {
-            if (!Tab.Peca(origem).PodeMoverPara(destino))
+            if (!Tab.Peca(origem).MovimentosPossiveis(destino))
             {
                 throw new TabuleiroException("Posição de destino invélida!");
             }
@@ -172,9 +173,9 @@ namespace jogoDeXadrez
             {
                 throw new TabuleiroException("Não tem rei da cor " + cor + " no tabuleiro!");
             }
-            foreach (Peca X in PecasEmJogo(Adversaria(cor)))
+            foreach (Peca x in PecasEmJogo(Adversaria(cor)))
             {
-                bool[,] matriz = X.MovimentosPossiveis();
+                bool[,] matriz = x.MovimentosPossiveis();
                 if (matriz[rei.Posicao.Linha, rei.Posicao.Coluna])
                 {
                     return true;

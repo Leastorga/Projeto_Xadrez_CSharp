@@ -18,7 +18,7 @@ namespace xadrez_console
             Console.WriteLine();
             Console.WriteLine($"Turno: {partida.Turno} ");
             Console.WriteLine($"Aguardando jogada: {partida.JogadorAtual}");
-            if(partida.Xaque)
+            if(partida.Xeque)
             {
                 Console.WriteLine("XEQUE!");
             }
@@ -50,29 +50,29 @@ namespace xadrez_console
         }
 
         // Método para imprimir o tabuleiro
-        public static void ImprimirTabuleiro(Tabuleiro tabuleiro)
+        public static void ImprimirTabuleiro(Tabuleiro tab)
         {
 
-            for (int i = 0; i < tabuleiro.Linhas; i++)
+            for (int i = 0; i < tab.Linhas; i++)
             {
                 Console.Write(8 - i + " ");
-                for (int j = 0; j < tabuleiro.Colunas; j++)
+                for (int j = 0; j < tab.Colunas; j++)
                 {
-                    ImprimirPeca(tabuleiro.Peca(i, j));
+                    ImprimirPeca(tab.Peca(i, j));
                 }
                 Console.WriteLine(); // Quando acabar as colunas pula de linha
             }
             Console.WriteLine("  a b c d e f g h");
         }
-        public static void ImprimirTabuleiro(Tabuleiro tabuleiro, bool[,] posicoesPossiveis)
+        public static void ImprimirTabuleiro(Tabuleiro tab, bool[,] posicoesPossiveis)
         {
             ConsoleColor fundoOriginal = Console.BackgroundColor;
             ConsoleColor fundoAlterado = ConsoleColor.DarkGray;
 
-            for (int i = 0; i < tabuleiro.Linhas; i++)
+            for (int i = 0; i < tab.Linhas; i++)
             {
                 Console.Write(8 - i + " ");
-                for (int j = 0; j < tabuleiro.Colunas; j++)
+                for (int j = 0; j < tab.Colunas; j++)
                 {
                     if (posicoesPossiveis[i, j])
                     {
@@ -82,7 +82,7 @@ namespace xadrez_console
                     {
                         Console.BackgroundColor = fundoOriginal;
                     }
-                    ImprimirPeca(tabuleiro.Peca(i, j));
+                    ImprimirPeca(tab.Peca(i, j));
                     Console.BackgroundColor = fundoOriginal;
                 }
                 Console.WriteLine(); // Quando acabar as colunas pula de linha

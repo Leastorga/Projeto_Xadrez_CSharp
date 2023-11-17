@@ -1,7 +1,5 @@
 // Na classe Tabuleiro nos temos linhas e colunas, além de peças. A peça é instânciada, pois uma peça está em uma linha e coluna inicialmente, além de se mover dentro da matriz.
 
-using tabuleiro;
-
 namespace tabuleiro
 {
     class Tabuleiro
@@ -28,6 +26,13 @@ namespace tabuleiro
             return Pecas[pos.Linha, pos.Coluna];
         }
 
+        //Verificar se existe uma peça nessa posição
+        public bool ExistePeca(Posicao pos)
+        {
+            ValidarPosicao(pos);
+            return Peca(pos) != null;
+        }
+
         // Criar função para adicionar peça e já verificar se existe uma peça nessa posição
         public void ColocarPeca(Peca p, Posicao pos)
         {
@@ -38,7 +43,7 @@ namespace tabuleiro
             Pecas[pos.Linha, pos.Coluna] = p;  // Colocando a peça p dentro da matriz na posição pos.linha e pos.coluna
             p.Posicao = pos; // Definindo que a posição da peça p, vai ser a que eu colocar em pos. Lembrando que a posição tem linha e coluna.
         }
-        
+
         // Função para retirar peças, se a posição for nula retorna nula, se não a variável auxiliar vai armazenar a posição da peça e depois fazer a posição ser nula, além disso a linha e coluna onde ela estava irá valer nulo e depois retornar, o que no caso retornaria " - " no tabuleiro.
         public Peca TirarPeca(Posicao pos)
         {
@@ -50,13 +55,6 @@ namespace tabuleiro
             aux.Posicao = null;
             Pecas[pos.Linha, pos.Coluna] = null;
             return aux;
-        }
-
-        //Verificar se existe uma peça nessa posição
-        public bool ExistePeca(Posicao pos)
-        {
-            ValidarPosicao(pos);
-            return Peca(pos) != null;
         }
 
         // Verificar se a posição inserida é valida
