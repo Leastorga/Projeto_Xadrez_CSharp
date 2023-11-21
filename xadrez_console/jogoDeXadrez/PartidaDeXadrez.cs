@@ -129,12 +129,28 @@ namespace jogoDeXadrez
         {
             Peca pecaCapturada = ExecutaMovimento(origem, destino);
 
-            if (EstaEmCheque(JogadorAtual))
+            if (EstaEmXeque(JogadorAtual))
             {
                 DesfazMovimento(origem, destino, pecaCapturada);
                 throw new TabuleiroException("Você não pode se colocar em xaque!");
             }
-            if (EstaEmCheque(Adversaria(JogadorAtual)))
+
+            Peca p = Tab.Peca(destino);
+
+            // JogadaEspecial promocao
+               if(p is Peao){
+                if((p.Cor == Cor.Branca && destino.Linha == 0) || (p.Cor == Cor.Preta && destino.Linha == 7))
+                {
+                    p = Tab.TirarPeca(destino);
+                    Pecas.Remove(p);
+                    Peca dama = new Dama(Tab, p.Cor);
+                    Tab.ColocarPeca(dama, destino);
+                    Pecas.Add(dama);
+                }
+               } 
+
+
+            if (EstaEmXeque(Adversaria(JogadorAtual)))
             {
                 Xeque = true;
             }
@@ -152,7 +168,7 @@ namespace jogoDeXadrez
                 MudaJogador();
             }
 
-            Peca p = Tab.Peca(destino);
+           
 
             // #JogadaEspecialEnPassant 
             if(p is Peao && (destino.Linha == origem.Linha - 2 || destino.Linha == origem.Linha + 2))
@@ -255,7 +271,7 @@ namespace jogoDeXadrez
             return null;
         }
 
-        public bool EstaEmCheque(Cor cor)
+        public bool EstaEmXeque(Cor cor)
         {
             Peca rei = Rei(cor);
             if (rei == null)
@@ -275,7 +291,7 @@ namespace jogoDeXadrez
 
         public bool TesteXequeMate(Cor cor)
         {
-            if (!EstaEmCheque(cor))
+            if (!EstaEmXeque(cor))
             {
                 return false;
             }
@@ -291,7 +307,7 @@ namespace jogoDeXadrez
                             Posicao origem = x.Posicao;
                             Posicao destino = new Posicao(i, j);
                             Peca pecaCapturada = ExecutaMovimento(origem, destino);
-                            bool TesteXeque = EstaEmCheque(cor);
+                            bool TesteXeque = EstaEmXeque(cor);
                             DesfazMovimento(origem, destino, pecaCapturada);
                             if (!TesteXeque)
                             {
