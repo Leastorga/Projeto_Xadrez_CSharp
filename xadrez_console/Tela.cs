@@ -8,7 +8,7 @@ namespace xadrez_console
 {
     class Tela
     {
-    
+
         // Método para imprimir o inicio da partida e os seguintes turnos
         public static void ImprimirPartida(PartidaDeXadrez partida)
         {
@@ -17,15 +17,27 @@ namespace xadrez_console
             ImprimirPecasCapturadas(partida);
             Console.WriteLine();
             Console.WriteLine($"Turno: {partida.Turno} ");
-            Console.WriteLine($"Aguardando jogada: {partida.JogadorAtual}");
-            if(partida.Xeque)
+            if (!partida.Terminada)
             {
-                Console.WriteLine("XEQUE!");
+
+                Console.WriteLine($"Aguardando jogada: {partida.JogadorAtual}");
+                if (partida.Xeque)
+                {
+                    Console.WriteLine("XEQUE!");
+                }
             }
+            else
+            {
+                Console.WriteLine("XEQUEMATE");
+                Console.WriteLine($"Vencedor: " + partida.JogadorAtual);
+
+            }
+
         }
 
         // Método para imprimir as peças capturadas
-        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida){
+        public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
+        {
             Console.WriteLine("Peças capturadas: ");
             Console.Write("Brancas: ");
             ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
@@ -36,11 +48,12 @@ namespace xadrez_console
             ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
             Console.ForegroundColor = aux;
             Console.WriteLine();
-            
+
         }
-        
+
         // Método para imprimir os conjuntos das peças capturadas
-        public static void ImprimirConjunto(HashSet<Peca> conjunto){
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
             Console.Write("[");
             foreach (Peca x in conjunto)
             {
